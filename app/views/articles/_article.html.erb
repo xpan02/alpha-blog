@@ -14,7 +14,7 @@
                   </small>
               </div>
           </div>
-       
+          <% if logged_in? && current_user == article.user %>
           <div class="article-actions">
             <%= link_to "Edit this article", edit_article_path(article), class: "btn btn-primary btn-xs", role: "button" %>
             <%= link_to "Delete this article", article_path(article), class: "btn btn-danger btn-xs", 
@@ -22,6 +22,7 @@
                                                                         method: :delete,
                                                                        data:{confirm:"Are you sure?"} %>
           </div>
+         <% end %>
       </div>
         
     </div>
