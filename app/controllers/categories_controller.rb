@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
     before_action :require_admin, except: [:index, :show]
+    
     def index
         @categories = Category.paginate(:page=>params[:page], :per_page=> 5)
     end
@@ -21,6 +22,21 @@ class CategoriesController < ApplicationController
           
         else
             render 'new'
+        end
+    end
+    
+    def edit
+        @category = Category.find(params[:id])
+    end
+    
+    def update
+      @category = Category.find(params[:id])
+        if @category.update(category_params)
+            flash[:success]="Category name has succesfully updated"
+            redirect_to categories_path(@category)
+        
+        else
+            render 'edit'
         end
     end
     
